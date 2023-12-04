@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import theme from "../../theme";
 import { ReactComponent as Star } from "../../resources/svgs/Star.svg";
-import ArrowComponent from "../ArrowComponent";
+import ArrowComponent from "../common/ArrowComponent";
 
 const textData = ["Our", "industry", "experties."];
 const industries = [
