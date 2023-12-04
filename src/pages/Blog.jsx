@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { ReactComponent as Star } from "../resources/svgs/Star.svg";
@@ -6,6 +6,8 @@ import Blog1 from "../resources/images/Blog1.png";
 import Blog2 from "../resources/images/Blog2.png";
 import Blog3 from "../resources/images/Blog3.png";
 import Blog4 from "../resources/images/Blog4.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const BlogData = [
   {
@@ -43,8 +45,19 @@ const BlogData = [
 ];
 
 const Blog = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
-    <>
+    <Box
+      sx={{
+        marginTop: {
+          md: 18,
+          xs: 10,
+        },
+      }}
+    >
       <Helmet>
         <title>Blog | {process.env.REACT_APP_APP_NAME}</title>
       </Helmet>
@@ -66,11 +79,24 @@ const Blog = () => {
           }}
         >
           <Star />
-          <Typography variant="h2">Blogs</Typography>
+          <Typography
+            sx={{
+              fontSize: {
+                lg: "60px",
+                md: "42px",
+                xs: "26px",
+              },
+              fontWeight: "700",
+              opacity: 1,
+            }}
+          >
+            Blogs
+          </Typography>
         </Box>
         <Box>
           {BlogData.map((blog) => (
             <Box
+              data-aos="fade-up"
               key={blog.title}
               sx={{
                 padding: "20px 32px",
@@ -91,29 +117,11 @@ const Blog = () => {
                   width: "100%",
                 }}
               >
+                <Typography variant="h1">{blog.title}</Typography>
                 <Typography
+                  variant="h4"
                   sx={{
-                    textDecorationLine: "underline",
-                    fontWeight: "700",
-                    fontSize: {
-                      lg: "40px",
-                      md: "30px",
-                      xs: "24px",
-                    },
-                  }}
-                >
-                  {blog.title}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontWeight: "400",
-                    fontSize: {
-                      lg: "20px",
-                      md: "16px",
-                      xs: "14px",
-                    },
-                    opacity: "0.8",
-                    padding: "15px 0 30px 0",
+                    padding: "20px 0 40px 0",
                   }}
                 >
                   {blog.description}
@@ -134,14 +142,13 @@ const Blog = () => {
                       key={tag}
                       variant="button"
                       sx={{
-                        padding: "6px 8px",
+                        padding: "8px 10px",
                         backgroundColor: "#1F1F1F",
                         fontSize: {
-                          md: "16px",
-                          xs: "12px",
+                          md: "18px",
+                          xs: "16px",
                         },
                         fontWeight: "400",
-                        color: "white",
                       }}
                     >
                       {tag}
@@ -150,9 +157,10 @@ const Blog = () => {
                   <Typography
                     sx={{
                       fontSize: {
-                        md: "16px",
-                        xs: "12px",
+                        md: "18px",
+                        xs: "16px",
                       },
+                      opacity: 1,
                     }}
                   >
                     {blog.readTime}
@@ -185,7 +193,7 @@ const Blog = () => {
           ))}
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 

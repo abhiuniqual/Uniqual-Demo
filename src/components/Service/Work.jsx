@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Grid } from "@mui/material";
 import { ReactComponent as Arrow } from "../../resources/svgs/Arrow.svg";
 import { ReactComponent as Agile } from "../../resources/svgs/Agile.svg";
@@ -8,6 +8,8 @@ import { ReactComponent as Data } from "../../resources/svgs/Data.svg";
 import { ReactComponent as Deep } from "../../resources/svgs/Deep.svg";
 import { ReactComponent as Product } from "../../resources/svgs/Product.svg";
 import theme from "../../theme";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const WorkApproch = [
   {
@@ -50,8 +52,9 @@ const WorkApproch = [
         <span
           style={{
             color: theme.palette.secondary.main,
-            borderBottom: `1px solid ${theme.palette.secondary.main}`,
+            borderBottom: `2px solid ${theme.palette.secondary.main}`,
             marginLeft: "10px",
+            fontWeight: "700",
           }}
         >
           Github
@@ -80,28 +83,35 @@ const WorkApproch = [
 ];
 
 const Work = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
-    <>
+    <Box
+      data-aos="fade-up"
+      sx={{
+        marginY: {
+          lg: 16,
+          md: 10,
+          xs: 4,
+        },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           gap: 1,
           alignItems: "center",
-          marginBottom: 4,
+          marginBottom: {
+            lg: 8,
+            md: 6,
+            sm: 2,
+          },
         }}
       >
         <Arrow />
-        <Typography
-          sx={{
-            fontSize: {
-              md: "36px",
-              xs: "28px",
-            },
-            fontWeight: "700",
-          }}
-        >
-          How We Work
-        </Typography>
+        <Typography variant="h2">How We Work</Typography>
       </Box>
       <Grid container spacing={4}>
         {WorkApproch.map((work, i) => (
@@ -109,22 +119,17 @@ const Work = () => {
             <Box sx={{ paddingY: 1 }}>
               <Box sx={{ display: "flex", gap: 4, paddingY: 2 }}>
                 {work.image}
-                <Typography
-                  sx={{
-                    fontSize: { md: "30px", xs: "24px" },
-                    fontWeight: 700,
-                  }}
-                >
+                <Typography sx={{ lineHeight: 1.5, opacity: 1 }}>
                   {work.title}
                 </Typography>
               </Box>
               <Typography
+                variant="h4"
                 sx={{
-                  width: "60%",
-                  fontSize: "20px",
-                  opacity: "0.7",
+                  width: "80%",
                   display: "inline-block",
                   alignItems: "center",
+                  opacity: 1,
                 }}
               >
                 {work.description}
@@ -133,7 +138,7 @@ const Work = () => {
           </Grid>
         ))}
       </Grid>
-    </>
+    </Box>
   );
 };
 

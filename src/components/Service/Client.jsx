@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BR from "../../resources/flags/BR.svg";
 import US from "../../resources/flags/us.svg";
 import G from "../../resources/flags/G.svg";
@@ -16,6 +16,8 @@ import SW from "../../resources/flags/swd.svg";
 import theme from "../../theme";
 import { Box, Typography, Grid } from "@mui/material";
 import { ReactComponent as Arrow } from "../../resources/svgs/Arrow.svg";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const FlagData = [
   {
@@ -77,6 +79,10 @@ const FlagData = [
 ];
 
 const Client = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   const gridItems = [];
 
   for (let i = 0; i < FlagData.length; i += 4) {
@@ -86,7 +92,10 @@ const Client = () => {
         {currentGridData.map((item, index) => (
           <Box key={item.country} sx={{ display: "flex", marginY: 2, gap: 2 }}>
             <img src={item.Flag} alt={item.country} />
-            <Typography variant="body2" color={theme.palette.primary.light}>
+            <Typography
+              sx={{ fontSize: { md: "20px", xs: "18px", opacity: 1 } }}
+              color={theme.palette.primary.light}
+            >
               {item.country}
             </Typography>
           </Box>
@@ -95,34 +104,37 @@ const Client = () => {
     );
   }
   return (
-    <>
+    <Box
+      data-aos="fade-up"
+      sx={{
+        marginY: {
+          lg: 16,
+          md: 10,
+          xs: 4,
+        },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           gap: 1,
           alignItems: "center",
-          marginBottom: 4,
+          marginBottom: {
+            lg: 8,
+            md: 6,
+            sm: 2,
+          },
         }}
       >
         <Arrow />
-        <Typography
-          sx={{
-            fontSize: {
-              md: "36px",
-              xs: "28px",
-            },
-            fontWeight: "700",
-          }}
-        >
-          We serve worldwide
-        </Typography>
+        <Typography variant="h2">We serve worldwide</Typography>
       </Box>
       <Box>
         <Grid container spacing={3}>
           {gridItems}
         </Grid>
       </Box>
-    </>
+    </Box>
   );
 };
 

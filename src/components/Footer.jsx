@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Grid, Link, TextField } from "@mui/material";
 import { ReactComponent as Arrow } from "../resources/svgs/Arrow.svg";
 import { ReactComponent as UpArrow } from "../resources/svgs/UpArrow.svg";
 import { useNavigate } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const data = [
   {
@@ -44,6 +46,10 @@ const data = [
 
 const Footer = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -63,7 +69,9 @@ const Footer = () => {
         }}
       >
         <Typography
+          data-aos="fade-right"
           sx={{
+            opacity: 1,
             overflow: "hidden !importnat",
             fontWeight: "700",
             fontSize: {
@@ -94,15 +102,7 @@ const Footer = () => {
           >
             <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
               <Arrow />
-              <Typography
-                sx={{
-                  fontSize: {
-                    md: "36px",
-                    xs: "28px",
-                  },
-                  fontWeight: "700",
-                }}
-              >
+              <Typography variant="subtitle2" data-aos="fade-right">
                 Contact
               </Typography>
             </Box>
@@ -119,6 +119,7 @@ const Footer = () => {
                   }}
                 >
                   <Typography
+                    data-aos="fade-right"
                     variant="h3"
                     sx={{
                       padding: "0 0 30px",
@@ -127,6 +128,7 @@ const Footer = () => {
                     {item.title}
                   </Typography>
                   <Box
+                    data-aos="fade-right"
                     sx={{ display: "flex", flexDirection: "column", gap: 1 }}
                   >
                     {item.links.map((link, index) => (
@@ -138,8 +140,8 @@ const Footer = () => {
                           cursor: "pointer",
                           fontFamily: "Sk-Modernist, sans-serif",
                           fontSize: {
-                            md: "18px",
-                            xs: "16px",
+                            md: "20px",
+                            xs: "18px",
                           },
                           fontWeight: "400",
                         }}
@@ -182,12 +184,35 @@ const Footer = () => {
             }}
           >
             <Box>
-              <Typography variant="h3" onClick={() => navigate("/service")}>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+                onClick={() => navigate("/service")}
+              >
                 Services
               </Typography>
-              <Typography variant="h3">Projects</Typography>
-              <Typography variant="h3">Team</Typography>
-              <Typography variant="h3">About us</Typography>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+              >
+                Projects
+              </Typography>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+              >
+                Team
+              </Typography>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+              >
+                About us
+              </Typography>
             </Box>
             <Box
               sx={{
@@ -197,11 +222,28 @@ const Footer = () => {
                 },
               }}
             >
-              <Typography variant="h3">Engagement model</Typography>
-              <Typography variant="h3" onClick={() => navigate("/blog")}>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+              >
+                Engagement model
+              </Typography>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+                onClick={() => navigate("/blog")}
+              >
                 Blogs
               </Typography>
-              <Typography variant="h3">Contact us</Typography>
+              <Typography
+                data-aos="fade-right"
+                variant="h3"
+                sx={{ marginBottom: 1 }}
+              >
+                Contact us
+              </Typography>
             </Box>
           </Box>
           <Box>
@@ -216,8 +258,13 @@ const Footer = () => {
                 fontWeight: "500",
                 margin: 0,
                 paddingX: { md: "16px", xs: "12px" },
+                "& .MuiInputBase-root-MuiOutlinedInput-root": {
+                  color: "white",
+                  opacity: 1,
+                },
                 "& .MuiInputBase-input": {
                   color: "white",
+                  opacity: 1,
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderRadius: 0,
@@ -234,7 +281,13 @@ const Footer = () => {
               }}
             >
               <UpArrow />
-              <Typography variant="h4">Join our community</Typography>
+              <Typography
+                data-aos="fade-right"
+                variant="h4"
+                sx={{ opacity: 1, fontWeight: "600" }}
+              >
+                Join our community
+              </Typography>
             </Box>
           </Box>
         </Box>
@@ -246,10 +299,10 @@ const Footer = () => {
             marginBottom: 2,
           }}
         >
-          <Typography variant="h6">
+          <Typography variant="body1">
             © 2022 / UniQual iTech. All rights reserved.
           </Typography>
-          <Typography variant="h6">SURAT/IND</Typography>
+          <Typography variant="body1">SURAT/IND</Typography>
         </Box>
       </Box>
     </Box>
